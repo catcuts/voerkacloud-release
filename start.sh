@@ -1,0 +1,1 @@
+bash /media/catcuts/0001C44100083553/Documents/catcuts/project/voerkacloud-release/alpine-voerkacloud/run.sh -c xxx_voerkacloud -i meeyi/voerkacloud:v1.2.python3.6.6.alpine3.7 -w /media/catcuts/0001C44100083553/Documents/catcuts/project/voerkacloud-release/alpine-voerkacloud -d /media/catcuts/0001C44100083553/Documents/catcuts/project/voerkacloud -p 8000 -m xxx_mysql
