@@ -38,6 +38,19 @@ echo -e "环境检查 ..."
     fi
 
     if [[ -n `docker ps | grep $MYSQL_NAME` ]]; then
+
+        if [[ -n `mysql -uroot -proot -h172.17.0.1 -P$MYSQL_PORT -e "show databases like 'voerka';"` ]]; then
+            echo -ne "发现已有数据库 voerka, \n\n\t删除 ? [yes/no] "
+            read clear_database
+            if [ `echo $clear_database | tr "[A-Z]" "[a-z]"` == "yes" ]; then
+                mysql -uroot -proot -h172.17.0.1 -P$MYSQL_PORT -e "drop database voerka;"
+                echo -e "现有数据库删除 完毕 ."
+            else
+                echo -e "发现已有数据库, 用户选择不删除($clear_data 而非 yes), 发布中止 ."
+                exit 1
+            fi
+        fi
+
         echo -ne "发现已有 mysql 容器在运行, \n\n\t中止 ? [yes/no] "
         read stop_mysql
         if [ `echo $stop_mysql | tr "[A-Z]" "[a-z]"` == "yes" ]; then
